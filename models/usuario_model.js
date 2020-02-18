@@ -8,4 +8,6 @@ const usuarioShema = new mongoose.Schema(
     {imagen: {type: String, required: false}}
 );
 
-module.exports =  mongoose.model('usuario',  usuarioShema, collection="usuarios");
+module.exports =  mongoose.model('usuarios',  usuarioShema, collection="usuarios");
+
+
