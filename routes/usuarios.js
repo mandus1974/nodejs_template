@@ -1,39 +1,38 @@
 const express = require('express');
+const joi = requiere('')
 const Usuario = require('../models/usuario_model');
 
 const debug = require('debug')('app_debug');
 
 const ruta = express.Router();
 
-ruta.post('/', (req, res) => {
-  
-   debug("Paso 001");
+ruta.post('/', (req, res) => {     
    let body = req.body;
-   let resultado = crearUsuario(body);
-   debug("Paso 004");
+   // Validar Formato de Daots
 
+   // -----------
+   let resultado = crearUsuario(body);
    resultado
-        .then(user=>{res.send("Añadido OK")})
+        .then(user=>{
+            res.send("Añadido OK");
+            console.log("Usiario Añadido = ", body.email);
+          })
         .catch(err => 
         {
             res.send({error:err})
-        });
-    debug("Paso 005");
-   
+        });       
 });
 
 
-async function crearUsuario(body){
-  debug("Paso 002");
-  debug(body);
+// Funcines de Usuario
+async function crearUsuario(body){  
   let usuario = new Usuario({
         email       :   body.email,
         nombre      :   body.nombre,
         password    :   body.password,
         estado    :   body.estado
-  });
-  usuario.nombre = body.nombre;
-  debug("Paso 003");
+  });  
+  usuario.nombre = body.nombre;  
   return await usuario.save();  
 };
 
