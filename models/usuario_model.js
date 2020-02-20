@@ -10,6 +10,8 @@ const usuarioShema = new mongoose.Schema(
     }
 );
 
-module.exports =  mongoose.model('usuarios',  usuarioShema, collection="usuarios2");
+usuarioShema.index({email:1},{unique:true});
+
+module.exports =  mongoose.model('usuarios',  usuarioShema, collection="usuarios");
 
 
