@@ -1,6 +1,9 @@
 const express = require('express');
 const Joi = require('@hapi/joi');
-const Usuario = require('../models/usuario_model');
+// import
+const crearUsuario = require('../db/usuarios_db.js');
+
+
 
 const debug = require('debug')('app_debug');
 
@@ -36,6 +39,7 @@ ruta.post('/', (req, res) => {
      return;
    }
    // -----------
+   
    let resultado = crearUsuario(body);
    resultado
         .then(user=>{
@@ -49,7 +53,7 @@ ruta.post('/', (req, res) => {
         });       
 });
 
-
+/* 
 // Funcines de Usuario
 async function crearUsuario(body){  
   let usuario = new Usuario({
@@ -61,5 +65,5 @@ async function crearUsuario(body){
   usuario.nombre = body.nombre;  
   return await usuario.save();  
 };
-
+ */
 module.exports = ruta;
