@@ -1,6 +1,6 @@
 const funciones = require('./funciones');
 
-function fnPost(res, body, schema, mensaje, fnCreacion)
+function fnPut(where, res, body, schema, mensaje, fnModificar)
 {
     const { error, value } = schema.validate(body);      
     if(error){
@@ -8,9 +8,10 @@ function fnPost(res, body, schema, mensaje, fnCreacion)
       return;
     }
     // -----------
-    let resultado = fnCreacion(body);
+    let resultado = fnModificar(where, body);
+    
     funciones.fnResultado_A01(res, resultado, mensaje);
 
 }
  
-module.exports = fnPost;
+module.exports = fnPut;

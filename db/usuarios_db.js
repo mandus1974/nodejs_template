@@ -13,5 +13,36 @@
     return await usuario.save();  
   };
 
-  module.exports = crearUsuario;
+  async function modificarUsuario(where, body){  
+      let usuario =  await Usuario.findOneAndUpdate(where, 
+            {
+                  $set : {
+                        nombre : body.nombre,
+                        password : body.password
+                  }
+            },
+            {new : true}
+      );
+      return usuario;  
+    };
+
+
+async function desactivarUsuario(where, body){  
+      let usuario =  await Usuario.findOneAndUpdate(where, 
+            {
+                  $set : {
+                        status : false
+                  }
+            },
+            {new : true}
+      );
+      return usuario;  
+    };
+
+  module.exports = {
+                  crearUsuario : crearUsuario,
+                  modificarUsuario : modificarUsuario,
+                  desactivarUsuario : desactivarUsuario
+  }
+
   
