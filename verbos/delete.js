@@ -1,12 +1,12 @@
 const funciones = require('./funciones');
 
-function fnDelete(where, res, schema, mensaje, fnModificar)
+function fnDelete(where, res, mensaje, fnModificar)
 {
-    const { error, value } = schema.validate(body);      
+    /* const { error, value } = schema.validate(body);      
     if(error){
       funciones.fnSchemeError_A01(res, error);
       return;
-    }
+    } */
     // -----------
     let resultado = fnModificar(where);
     

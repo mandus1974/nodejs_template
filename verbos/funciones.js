@@ -1,5 +1,20 @@
 const debug = require('debug')('app_debug');
 
+function fnDesplegar_A01(res, resultado)    {
+    resultado
+            .then(docs=>{
+                
+                res.json({
+                    docs : docs                    
+                });             
+            })
+            .catch(err => 
+            {
+                debug(err);
+                res.status(400).json({error:err});
+                
+            });  
+}
 
 function fnResultado_A01(res, resultado, mensaje)
 {
@@ -14,7 +29,7 @@ function fnResultado_A01(res, resultado, mensaje)
             .catch(err => 
             {
                 debug(err);
-                res.status(400).json({error:err});
+                res.status(400).json({error:err.errmsg});
                 
             });  
 }
@@ -28,5 +43,6 @@ function fnSchemeError_A01(res, error) {
 // -----------------------------
 module.exports = {
     fnResultado_A01 : fnResultado_A01,
-    fnSchemeError_A01 : fnSchemeError_A01
+    fnSchemeError_A01 : fnSchemeError_A01,
+    fnDesplegar_A01 : fnDesplegar_A01
 }

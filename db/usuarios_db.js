@@ -1,7 +1,17 @@
  
  const Usuario = require('../models/usuario_model');
+ const debug = require('debug')('app_debug');
 
  // Funcines de Usuario
+ async function traerUsuarios(where, select, numeroPags, tamPags){  
+      let usuarios = await Usuario
+                  .find(where)
+                  .select(select)
+                  .skip((numeroPags - 1) * tamPags)
+                  .limit(tamPags);
+      return usuarios;  
+    };
+
  async function crearUsuario(body){  
     let usuario = new Usuario({
           email       :   body.email,
@@ -27,11 +37,13 @@
     };
 
 
-async function desactivarUsuario(where, body){  
+async function desactivarUsuario(where){  
+      debug("==== Dentro de: desactivarUsuario ");      
+      debug("where = " + JSON.stringify(where));      
       let usuario =  await Usuario.findOneAndUpdate(where, 
             {
                   $set : {
-                        status : false
+                        estado : false
                   }
             },
             {new : true}
@@ -42,7 +54,8 @@ async function desactivarUsuario(where, body){
   module.exports = {
                   crearUsuario : crearUsuario,
                   modificarUsuario : modificarUsuario,
-                  desactivarUsuario : desactivarUsuario
+                  desactivarUsuario : desactivarUsuario,
+                  traerUsuarios : traerUsuarios
   }
 
   
